@@ -102,8 +102,8 @@ def initialize() {
     state.battery = 0
     state.illuminance = ""
     state.illuminancename = ""
-    runIn(5,getSettings())
-    runIn(30,getMotionStatus())
+    getSettings()
+    getMotionStatus()
 }
 
 def installed() {
@@ -154,7 +154,7 @@ private dbCleanUp() {
 
 def refresh(){
     logDebug "Shelly Motion 2 IP ${ip} refresh."
-    runIn(5,getMotionStatus())
+    getMotionStatus()
 }
 
 def getMotionStatus(){
