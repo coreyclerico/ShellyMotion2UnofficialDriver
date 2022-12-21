@@ -275,7 +275,7 @@ try {
         updateDataValue("MAC", obs.device.mac)
         updateDataValue("SSID", obs.wifi_sta.ssid)
         updateDataValue("Timezone", obs.timezone)
-        updateDataValue("Daylight Savings", obs.tz_dst)
+       // updateDataValue("Daylight Savings", obs.tz_dst)
        
         
     } // End try
