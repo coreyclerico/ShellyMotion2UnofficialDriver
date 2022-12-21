@@ -17,8 +17,9 @@ This is built on the same initial code of Scott Grayban's Shelly framework, plea
 As far as DHCP settings, I use pre-set DHCP static IPs for all Shelly's on a Juniper router just to give an example.
 
 set system services dhcp static-binding 8c:f6:81:14:93:25 fixed-address 172.16.2.130
+
 set system services dhcp static-binding 8c:f6:81:14:93:25 host-name shellymotion-FamilyRoom
 
 If your going across a router hop to get the callback to work a hex IP must be used in the device network id (edit). For example: AC100282
 
-Shelly Motion 2 are fabulous tech.  Love them already.  Enjoy.
+Shelly Motion 2 is fabulous tech.  Love them already.  Enjoy.
