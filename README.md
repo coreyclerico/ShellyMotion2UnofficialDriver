@@ -6,7 +6,7 @@ Install your Motion 2 device on WiFi, upgrade the firmware and set the sensor re
 
 https://www.shelly.cloud/en-us/products/product-overview/shelly-motion-2-1
 
-Add in all the Web Actions the url for callback to Hubitat...
+Add in all the Web Actions URL for callback to Hubitat...
 
 http://172.16.1.111:39501   (your Hubitat IP address)
 
