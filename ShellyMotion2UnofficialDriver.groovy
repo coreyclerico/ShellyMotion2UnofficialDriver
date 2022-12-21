@@ -74,7 +74,7 @@ metadata {
 	preferences {
 	def refreshRate = [:]
 		refreshRate << ["1 min" : "Refresh every minute"]
-        refreshRate << ["5 min" : "Refresh every 5 minutes"]
+                refreshRate << ["5 min" : "Refresh every 5 minutes"]
 		refreshRate << ["15 min" : "Refresh every 15 minutes"]
 		refreshRate << ["30 min" : "Refresh every 30 minutes"]
 		refreshRate << ["manual" : "Manually or Polling Only"]
@@ -82,9 +82,9 @@ metadata {
 	input("ip", "string", title:"IP", description:"Shelly IP Address", defaultValue:"" , required: true)
 	input name: "username", type: "text", title: "Username:", description: "(blank if none)", required: false
 	input name: "password", type: "password", title: "Password:", description: "(blank if none)", required: false
-    input("refresh_Rate", "enum", title: "Device Refresh Rate", description:"<font color=red>!!WARNING!!</font><br>DO NOT USE if you have over 50 Shelly devices.", options: refreshRate, defaultValue: "manual")
+        input("refresh_Rate", "enum", title: "Device Refresh Rate", description:"<font color=red>!!WARNING!!</font><br>DO NOT USE if you have over 50 Shelly devices.", options: refreshRate, defaultValue: "manual")
        
-    input name: "debugOutput", type: "bool", title: "Enable debug logging?", defaultValue: true
+        input name: "debugOutput", type: "bool", title: "Enable debug logging?", defaultValue: true
 	input name: "debugParse", type: "bool", title: "Enable JSON parse logging?", defaultValue: true
 	input name: "txtEnable", type: "bool", title: "Enable descriptionText logging", defaultValue: true
 	}
@@ -126,7 +126,7 @@ def updated() {
 		case "1 min" :
 			runEvery1Minute(autorefresh)
 			break
-        case "5 min" :
+                case "5 min" :
 			runEvery5Minutes(autorefresh)
 			break
 		case "15 min" :
