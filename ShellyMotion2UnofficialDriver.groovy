@@ -69,12 +69,17 @@ metadata {
         capability "IlluminanceMeasurement"
 
         command "RebootDevice"
+        command "refresh"
+        command "initialize"
+        
+        attribute "WiFiSignal", "string"
+        attribute "illuminancename", "string"
 	}
 
 	preferences {
 	def refreshRate = [:]
 		refreshRate << ["1 min" : "Refresh every minute"]
-                refreshRate << ["5 min" : "Refresh every 5 minutes"]
+        refreshRate << ["5 min" : "Refresh every 5 minutes"]
 		refreshRate << ["15 min" : "Refresh every 15 minutes"]
 		refreshRate << ["30 min" : "Refresh every 30 minutes"]
 		refreshRate << ["manual" : "Manually or Polling Only"]
@@ -82,9 +87,9 @@ metadata {
 	input("ip", "string", title:"IP", description:"Shelly IP Address", defaultValue:"" , required: true)
 	input name: "username", type: "text", title: "Username:", description: "(blank if none)", required: false
 	input name: "password", type: "password", title: "Password:", description: "(blank if none)", required: false
-        input("refresh_Rate", "enum", title: "Device Refresh Rate", description:"<font color=red>!!WARNING!!</font><br>DO NOT USE if you have over 50 Shelly devices.", options: refreshRate, defaultValue: "manual")
+    input("refresh_Rate", "enum", title: "Device Refresh Rate", description:"<font color=red>!!WARNING!!</font><br>DO NOT USE if you have over 50 Shelly devices.", options: refreshRate, defaultValue: "manual")
        
-        input name: "debugOutput", type: "bool", title: "Enable debug logging?", defaultValue: true
+    input name: "debugOutput", type: "bool", title: "Enable debug logging?", defaultValue: true
 	input name: "debugParse", type: "bool", title: "Enable JSON parse logging?", defaultValue: true
 	input name: "txtEnable", type: "bool", title: "Enable descriptionText logging", defaultValue: true
 	}
@@ -103,7 +108,7 @@ def initialize() {
     state.illuminance = ""
     state.illuminancename = ""
     getSettings()
-    getMotionStatus()
+    runIn(10,getMotionStatus)
 }
 
 def installed() {
@@ -126,7 +131,7 @@ def updated() {
 		case "1 min" :
 			runEvery1Minute(autorefresh)
 			break
-                case "5 min" :
+        case "5 min" :
 			runEvery5Minutes(autorefresh)
 			break
 		case "15 min" :
@@ -172,12 +177,11 @@ try {
 
         ison = obs.output
 
-        state.rssi = obs.wifi_sta.rssi
-        
+      
         if (state.motiontimestamp != obs.sensor.timestamp && state.motion != obs.sensor.motion) {
            state.motiontimestamp = obs.sensor.timestamp
            if ( state.motion != obs.sensor.motion && obs.sensor.motion == true ) { 
-               sendEvent(name: "motion", value: "active"); 
+               sendEvent(name: "motion", value: "active") 
                state.motioncounter++ 
                sendEvent(name: "motioncounter", value: state.motioncounter)
                }
@@ -187,7 +191,7 @@ try {
                 }
 
         if ( state.tamper != obs.sensor.vibration && obs.sensor.vibration == true ) { 
-               sendEvent(name: "tamper", value: "detected"); 
+               sendEvent(name: "tamper", value: "detected")
                state.tampercounter++ 
                sendEvent(name: "tampercounter", value: state.tampercounter)
                } else if (obs.sensor.vibration == false) {
@@ -231,6 +235,7 @@ try {
         if (signal < -90 && signal >= -100) {
             sendEvent(name: "WiFiSignal", value: "<font color='red'>Weak</font>", isStateChange: true);
         }
+        state.rssi = obs.wifi_sta.rssi
         sendEvent(name: "rssi", value: state.rssi)
 
 } // End try
@@ -275,7 +280,7 @@ try {
         updateDataValue("MAC", obs.device.mac)
         updateDataValue("SSID", obs.wifi_sta.ssid)
         updateDataValue("Timezone", obs.timezone)
-       // updateDataValue("Daylight Savings", obs.tz_dst)
+        //updateDataValue("Daylight Savings", obs.tz_dst)
        
         
     } // End try
@@ -364,4 +369,3 @@ try {
     }
     runIn(15,refresh)
 }
-
