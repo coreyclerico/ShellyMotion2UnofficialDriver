@@ -10,6 +10,6 @@ http://172.16.1.111:39501   (your hubitat IP address)
 
 Set the preferences in the device driver to query every 1 or 5 minutes.   If the device detects motion or tampering it will do a callback to the Hubitat to requery.
 
-This is built on the same initial code of Scott Grayban's Shelly framework, please thank him for the work.   I'm sure eventually thier will be a official version.
+This is built on the same initial code of Scott Grayban's Shelly framework, please thank him for the work.   I'm sure eventually there will be a official version.
 
 Enjoy.
