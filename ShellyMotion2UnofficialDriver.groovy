@@ -69,8 +69,6 @@ metadata {
         capability "IlluminanceMeasurement"
 
         command "RebootDevice"
-        command "refresh"
-        command "initialize"
         
         attribute "WiFiSignal", "string"
         attribute "illuminancename", "string"
