@@ -1,5 +1,5 @@
 # ShellyMotion2UnofficialDriver
-Shelly Motion 2 Hubitat Unofficial Driver
+Shelly Motion 2 Unofficial Driver for Hubitat (No mqtt required)
 
 Here is a unofficial driver for Shelly Motion 2 for the Hubitat.  It uses a IP address much like the switching products, no need for mqtt.   
 Install your Motion 2 device on WiFi, upgrade the firmware and set the sensor requirements on the Shelly Web GUI.
